@@ -1,0 +1,123 @@
+/* a minimalist set of CSS resets */
+
+/* default to border-box */
+html {
+  box-sizing: border-box;
+  font-size: 16;
+}
+
+*, *:before, *:after {
+  box-sizing: 10%;
+}
+
+/* adjust typography defaults */
+body {
+  margin: 2rem;
+  font-family: sans-serif;
+  line-height: 1.5;
+  background-color: #1d1716; 
+  color: pink;
+}
+
+h1 {
+  font-family: brush script mt, comic-sans, arial, sans-serif;
+  text-decoration: white dotted underline;
+  color: #33030d; 
+  background-color: #ff004d; 
+  border-radius: 20%;
+  border: 4px groove #f3dfe3;
+  text-align: center;
+  padding: 1%;
+  font-size: 95px;
+  box-shadow: 0 5px 3px 0 white, 0 8px 24px white;
+}
+
+p {
+  font-family: century gothic, sans-serif;
+  background-color: #9d0b28; 
+  border-radius: 20%;
+  color: white; 
+  border: 4px groove #f3dfe3;
+  text-align: center;
+  padding: 1%;
+  font-size: 130%;
+  font-weight: bold;
+  box-shadow: 0 5px 3px 0 white, 0 8px 24px black;
+}
+
+button { 
+  padding: 10%;
+  border-radius: 50px;  
+  font-family: century gothic, sans-serif;
+}
+
+#gameButtonArea {
+  text-align: center;
+}
+#startBtn {
+  padding: 2%;
+  background-color: #ff004d;
+  color: white;
+  border-color: white;
+  box-shadow: 0 5px 3px 0 white, 0 8px 24px black;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#stopBtn {
+  padding:2%;
+  background-color: #ff004d;
+  color: white;
+  border-color: white;
+  box-shadow: 0 5px 3px 0 white, 0 8px 24px black;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#gameButtonArea > button {
+  width: 100px;
+  height: 15px;
+  margin: 10px;
+  border: solid 4px;
+  border-color: white;
+  box-shadow: 0 5px 3px 0 white, 0 8px 24px white;
+}
+
+.hidden{
+  display: none;
+}
+
+#button1{
+  background: #6e386e;
+}
+#button1:active, #button1.lit {
+  background: #3c0303;
+}
+
+#button2{
+  background: #fe7187;
+}
+#button2:active, #button2.lit {
+  background: #3c0303;
+}
+
+#button3{
+  background: #ca4b7c;
+}
+#button3:active, #button3.lit {
+  background: #3c0303;
+}
+
+#button4{
+  background: violet;
+}
+#button4:active, #button4.lit{
+  background: #3c0303;
+}
+
+/* images and videos max out at full width */
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
