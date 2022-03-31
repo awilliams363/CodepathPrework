@@ -4,21 +4,24 @@
 //constants
 const cluePauseTime = 500; //how long until the next clue is played (ms)
 const nextClueWaitTime = 400; //initial delay wait time 
-const numberOfRounds = 8; // number of rounds to complete to win; Must Match size of "pattern" array
+const numberOfRounds = 10; // number of rounds to complete to win; Must match size of "pattern" array
 
 //variables
-var clueHoldTime = 600; //how long the clue is played (ms). This was originally a constant but had to be changed to allow me to change the game speed each round 
+var clueHoldTime = 600; //how long the clue is played (ms). Changed constant to var to enable edits to value during playSingleClue() and playSequence()
 var pattern = new Array(10); //holds the sequence pattern for each match
 var progress = 0; //counter for number of rounds user has completed
 var gamePlaying = false; //boolean used to toggle whether the game is playing or not
 var tonePlaying = false;  //boolean used to toggle button audio
-var volume = 0.5; //general volume for each button press
+var volume = 0.5; //general volume for game button audio
 var guessCounter = 0; //counter for number of guesses performed by user
-//used in randomNumber function to generate integers between 1-4 for each button
+
+//used in randomNumber() function to generate integers between 1-4 for each game button
 var randomIntMin = 1; 
 var randomIntMax = 4; 
+
 //used to hold result of randomNumber() function. The results will be put in the pattern array and used as the seuqence pattern
 var randomNumberResult;
+
 //used to increase speed of each round in the playSingleClue() and playSequence() functions
 var decreaseTime = 0;
 
@@ -28,6 +31,7 @@ function randomNumber(){
   console.log("Random number generated: "+randomNumberResult);
   return randomNumberResult;
 }
+
 //defines the start of the game by hiding the start button, displaying the stop button,
 //setting gamePlaying boolean to true, setting the sequence pattern, and playing the clue sequence 
 function startGame(){
@@ -40,47 +44,55 @@ function startGame(){
   playClueSequence();
   clueHoldTime = 600;
 }
-//Defines the end of the game (loss or win) by setting gamePlaying to false,
+
+//Defines the end of the game (loss and win) by setting gamePlaying to false,
 //hiding the stop button, and displaying the start button 
 function stopGame(){
   gamePlaying = false; 
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
 }
+
 //Sends game over message to user in event of a loss
 function lostGame(){
   stopGame();
   alert("Game Over. Practice makes Perfect :)")
 }
+
 //Sends winnng message to user in the event of a win 
 function winGame(){
   stopGame();
   alert("You win! <3");
 }
+
 //Allows the button to be highlighted while being played as a clue 
 function lightButton(btn){
   document.getElementById("button"+btn).classList.add("lit")
 }
-//Clears button highlights when it has been played as a clue 
+
+//Clears button highlights after it has been played as a clue 
 function clearButton(btn){
   document.getElementById("button"+btn).classList.remove("lit")
 }
-//Defines how to play 1 clue that involves:
+
+//Defines how to play 1 clue which involves:
 //highlighting the button, playing the button's audio (timed), and clearing the highlight after a speficied time 
 function playSingleClue(btn){
   if(gamePlaying){
     lightButton(btn);
-    //here the decreaseTime (set during variable declariong and increased in guess() function) is used to lower to the amount of time a clue is played (audio and highlight)
+    //here the decreaseTime (incremented later in guess() function) is used to lower to the amount of time a clue is played and the time between clues
     playTone(btn, clueHoldTime - decreaseTime); 
     setTimeout(clearButton, clueHoldTime - decreaseTime, btn);
   }
 }
+
 //creates a new sequence pattern with each start of a new game using the randomNumber() method
 function setPattern(){
   for(let j = 0; j<= numberOfRounds+1; j++){
     pattern[j] = randomNumber();
   }
 }
+
 // Allows for SingleClue() to be played as a sequence 
 function playClueSequence(){
   guessCounter = 0;
@@ -94,6 +106,8 @@ function playClueSequence(){
     delay += cluePauseTime - decreaseTime;
   }
 }
+
+
 //guess(btn) function from prework instructions
 function guess(btn){
   console.log("user guessed: " + btn);
@@ -111,7 +125,7 @@ function guess(btn){
       }else{
         //Pattern correct. Add next segment
         progress++;
-        decreaseTime = decreaseTime + 30; 
+        decreaseTime = decreaseTime + 30; //increases clue sequence speed by increasing the time subtracted from the clue play and hold times 
         playClueSequence();
       }
     }else{
@@ -128,8 +142,8 @@ function guess(btn){
 // Sound Synthesis Functions from prework instructions
 //I altered the original frequencies
 const freqMap = {
-  1: 261.6,
-  2: 329.6,
+  1: 261.0,
+  2: 329.0,
   3: 392,
   4: 469.6,
 } 

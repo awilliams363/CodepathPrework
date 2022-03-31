@@ -3,7 +3,7 @@
 **Memory Game** is a Light & Sound Memory game to apply for CodePath's SITE Program. 
 
 Submitted by: Angel Williams
-Time spent: **#** hours spent in total
+Time spent: 8 hours spent in total (4hr programming; 4hr researching topics introduced)
 
 Link to project: https://codepath-site-task1.glitch.me
 
@@ -38,9 +38,9 @@ The following **additional** features are implemented:
 ## Video Walkthrough (GIF)
 
 If you recorded multiple GIFs for all the implemented features, you can add them here:
-![1]https://recordit.co/bh1cCjTrkt (win game playthrough (set to 8 rounds))
+![1]https://recordit.co/bh1cCjTrkt (win game playthrough (set to 8 rounds intstead of 10 to save time on gif))
 ![2]https://recordit.co/pLB2f279j5 (incorrect guess/lose game)
-![3]https://recordit.co/ancmf4U9tN (Displays console messages showing random pattern generation, clues played, and user guess)
+![3]https://recordit.co/ancmf4U9tN (Displays console messages showing random pattern generation, clues played, user guess, and new random pattern generation upon stopping current game and starting a new game)
 ![](gif4-link-here)
 
 ## Reflection Questions
@@ -54,60 +54,88 @@ If you recorded multiple GIFs for all the implemented features, you can add them
 
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words) 
 I came into this project with very little experience with hmtl and almost no expereince with css and js. 
-Learning the correct syntax presented its own challenge. I had difficulties with getting the buttons to light up without a click. 
-When I was adding color to the buttons i deviated from the speficied format: 
-Instead of: "#button1{
+Since I wasn’t very familiar with these languages, my main challenge was practicing language syntax and gaining a better understanding of the program’s predefined functions. 
+The prework page provided very good examples and definitions of the programming elements used, but I found that supplemental research on certain functions and elements expanded my insight on them. 
+For example, I had an issue with a syntax-based error when implementing the clearButton(btn) function within the playSingleClue(btn) function. 
+ I originally typed: 
+ "function playSingleClue(btn){
+  if(gamePlaying){
+    lightButton(btn);
+    playTone(btn, clueHoldTime - decreaseTime);
+    setTimeout(clearButton(btn), clueHoldTime - decreaseTime); (Point of error)
+  } "
+  
+  The incorrect syntax caused my program to play the clue sequence without clearing the highlighted buttons. To troubleshoot I tested the clearButton() function by itself. 
+  After confirming it worked, I realized that the problem lied in its implementation within the playSingleClue() function. 
+  Since clearButton() is used within the setTimeout function and is functional on its own, I figured the problem must be with the setTimeout() function. 
+  I researched the setTimeout method and saw that the correct syntax was actually: 
+  setTimeout(function, milliseconds, param1, param2, ...) 
+  I had typed: setTimeout(function(param1), milliseconds)
+  After fixing the syntax to: setTimeout(clearButton, clueHoldTime – decreaseTIme, btn); the playSingleClue() function was successful.  
+
+Before this issue, I had another syntax-based error in the css file. I had difficulties getting the buttons to light up without a physical click. 
+When I got to the prework instruction on how to change the button color for clues,  I deviated from the specified format because I had a personal preference for how I wanted the format information to be grouped.
+I wanted to list the background color of each button, and then list the background color of the highlight (“lit” and active) buttons below it. 
+Thus, instead of: 
+"#button1{
   background: #6e386e;
 }
 #button1:active, #button1.lit {
   background: #3c0303;
-}"
+}
+…"
+
 I did:
 "#button1{
   background: #6e386e;
 }
  #button2{
  background: #fe7187;
- }"
- I put the active and lit spefications at the bottom. This created some cases where the buttons would not light up at all. I originally tried to fix this by defining the pseudoclass ".lit" but I got the same result. 
- After some trial and error, I realized the importance of the formatting of the css code and went with the format from the directions. 
- I also had an issue with a syntax error when implementing the clearButton(btn) function. Withtin the playSingleClue(btn) function, I used the setTimeout() method.
- I originally typed: "function playSingleClue(btn){
-  if(gamePlaying){
-    lightButton(btn);
-    playTone(btn, clueHoldTime - decreaseTime);
-    setTimeout(clearButton(btn), clueHoldTime - decreaseTime); (Point of error)
-  } "
-  The incorrect syntax cause my program to play the clue sequence without clearing the highlighted buttons. 
-  To troubleshoot I tested the clearButton function by itself. After confirming it worked, I then saw that the problem lied in its implementation in paySingleClue()
-  I researched the setTimeout method and saw that the correct sytax was: 
-  setTimeout(function, milliseconds, param1, param2, ...) 
-  After fixing the sytax, the game was functional. 
-  I had a hard time perfecting the logic behind the guess() function. 
+ }
+…
+#button1:active, #button1.lit{
+Background: … 
+}
+#button2:active, #button2.lit{
+Background: …
+}
+… 
+"
+This created some cases where the buttons would not light up at all. 
+I originally tried to fix this by defining the pseudoclass ".lit" in a similar way to how the “.hidden” class was defined,
+but this did not resolve the issue. 
+After some trial and error, I realized the importance of the formatting of the css code and went with the format from the directions. 
+ 
 3. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
-  This project has peeked my curiousity in web development, and has nutured a desire to learn more about the subject.
-  How can I implement video into my projects? I would like to try and create more css art. 
-  How do I implement and manage larger volumes of data (forms, records, etc)?
-  Which functions provide better time and space complexities? 
-  How can the functions I learned in this project be expanded to larger projects?
+This project has inspired a stronger curiosity around web development for me. This project was a good  look into the basics of these languages, and has left me with questions like: 
+How can I implement video into my projects? 
+How do I record and manage larger volumes of data (forms, records, etc)?
+Which methods of function implentation may provide better time and space complexities? 
+How can the functions I learned in this project be expanded to larger projects?
+How would I go about designing a more complex css art project, such as art that contains irregular shapes, etc? 
+What are some other predesigned functions that I can use to create new projects?
+How does the design of the front-end interface affect the possibilities on the back-end? Will certain methods of designing put limitations on the back-end of web page? 
+
 
 4. If you had a few more hours to work on this project, what would you spend them doing (for example: refactoring certain functions, adding additional features, etc). Be specific. (recommended 100 - 300 words) 
  I woud have perfected my own guess() function. 
- I would have added background music that would play upon pressing start and stop unpon clicking stop and have the option to toggle play/mute with buttons similar to the stop and start buttons
+ I would have like to add background music that would have the option to toggle play/mute with buttons similar to the stop and start buttons
  I think it would be fun to give the game an unlimited number of rounds so the player can test their abilities. 
- If I were to go the unlimited rounds route, I would have implemented the "Player only loses after 3 mistakes", but since there are only 10 rounds I think that giving the user 1 chance has the potential to add an addictive edge to the game
+ If I were to go the unlimited rounds route, I would have implemented the "Player only loses after 3 mistakes",
+ but since there are only 10 rounds I think that giving the user 1 chance has the potential to add an addictive edge to the game.
  I would have like the end game messages (game over, you win, etc ) to be a more decorative pop-up window with different audio cues depending on a win or a loss 
- I implemented a feature within the PlaySequence() and PlaySigleClue() functions that speeds up the clues each round. However, the page needs to be refreshed to reset the speed to normal. I would have fixed it to where the speed returns to normal after stopping the game 
- I would have made the audio more complex, like each button would have either a major, minor, or diminished chord in a different key. 
+ I did implement a feature within the PlaySequence() and PlaySigleClue() functions that speeds up the clues each round. 
+ However, the page needs to be refreshed to reset the speed to normal. I would have fixed it to where the speed returns to normal after stopping the game. 
+ I would have made the game button audio more complex. Each button would have either a major, minor, or diminished chord in a different key. 
  I would also implement a time limit for guesses. With this I might also implement a pause game button that is only visible while the game is playing. 
  (Even though players could cheat the time limit with a pause button, its a personal prefence of mine to allow the user to step away from the computer if needed)
- I really enjoyed this project, so I will keep working on it to add in this features. 
+ I really enjoyed this project, so I will keep working on it outside of Codepath to add in these desired features. 
 
 
 
 ## Interview Recording URL Link
 
-[My 5-minute Interview Recording](your-link-here)
+[My 5-minute Interview Recording]https://www.loom.com/share/d4557109c47e474296fb8306e4023e20
 
 
 ## License
