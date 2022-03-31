@@ -38,9 +38,9 @@ The following **additional** features are implemented:
 ## Video Walkthrough (GIF)
 
 If you recorded multiple GIFs for all the implemented features, you can add them here:
-![1]https://recordit.co/bh1cCjTrkt (win game playthrough (set to 8 rounds intstead of 10 to save time on gif))
-![2]https://recordit.co/pLB2f279j5 (incorrect guess/lose game)
-![3]https://recordit.co/ancmf4U9tN (Displays console messages showing random pattern generation, clues played, user guess, and new random pattern generation upon stopping current game and starting a new game)
+![1]https://recordit.co/bh1cCjTrkt.gif (win game playthrough (set to 8 rounds intstead of 10 to save time on gif))
+![2]https://recordit.co/pLB2f279j5.gif (incorrect guess/lose game)
+![3]https://recordit.co/ancmf4U9tN.gif (Displays console messages showing random pattern generation, clues played, user guess, and new random pattern generation upon stopping current game and starting a new game)
 ![](gif4-link-here)
 
 ## Reflection Questions
