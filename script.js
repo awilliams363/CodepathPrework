@@ -1,25 +1,35 @@
-var clueHoldTime = 600;  
-const cluePauseTime = 500;
-const nextClueWaitTime = 400;
-const numberOfRounds = 8;
+//Angel Williams 
+//CodePath SITE Prework: Light and Sound Memory Game (js file)
 
-var pattern = new Array(10);
-var progress = 0;
-var gamePlaying = false;
-var tonePlaying = false; 
-var volume = 0.5;
-var guessCounter = 0;
-var randomIntMin = 1;
+//constants
+const cluePauseTime = 500; //how long until the next clue is played (ms)
+const nextClueWaitTime = 400; //initial delay wait time 
+const numberOfRounds = 8; // number of rounds to complete to win; Must Match size of "pattern" array
+
+//variables
+var clueHoldTime = 600; //how long the clue is played (ms). This was originally a constant but had to be changed to allow me to change the game speed each round 
+var pattern = new Array(10); //holds the sequence pattern for each match
+var progress = 0; //counter for number of rounds user has completed
+var gamePlaying = false; //boolean used to toggle whether the game is playing or not
+var tonePlaying = false;  //boolean used to toggle button audio
+var volume = 0.5; //general volume for each button press
+var guessCounter = 0; //counter for number of guesses performed by user
+//used in randomNumber function to generate integers between 1-4 for each button
+var randomIntMin = 1; 
 var randomIntMax = 4; 
+//used to hold result of randomNumber() function. The results will be put in the pattern array and used as the seuqence pattern
 var randomNumberResult;
+//used to increase speed of each round in the playSingleClue() and playSequence() functions
 var decreaseTime = 0;
 
+//Random number generator used to generate button sequence pattern
 function randomNumber(){
-  randomNumberResult = Math.floor(Math.random() * (randomIntMax-randomIntMin) + randomIntMin);
+  randomNumberResult = Math.floor(Math.random() * (randomIntMax-randomIntMin) + randomIntMin); 
   console.log("Random number generated: "+randomNumberResult);
   return randomNumberResult;
 }
-
+//defines the start of the game by hiding the start button, displaying the stop button,
+//setting gamePlaying boolean to true, setting the sequence pattern, and playing the clue sequence 
 function startGame(){
   progress = 0;
   gamePlaying = true;
@@ -30,37 +40,48 @@ function startGame(){
   playClueSequence();
   clueHoldTime = 600;
 }
+//Defines the end of the game (loss or win) by setting gamePlaying to false,
+//hiding the stop button, and displaying the start button 
 function stopGame(){
   gamePlaying = false; 
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
 }
+//Sends game over message to user in event of a loss
 function lostGame(){
   stopGame();
   alert("Game Over. Practice makes Perfect :)")
 }
+//Sends winnng message to user in the event of a win 
 function winGame(){
   stopGame();
   alert("You win! <3");
 }
+//Allows the button to be highlighted while being played as a clue 
 function lightButton(btn){
   document.getElementById("button"+btn).classList.add("lit")
 }
+//Clears button highlights when it has been played as a clue 
 function clearButton(btn){
   document.getElementById("button"+btn).classList.remove("lit")
 }
+//Defines how to play 1 clue that involves:
+//highlighting the button, playing the button's audio (timed), and clearing the highlight after a speficied time 
 function playSingleClue(btn){
   if(gamePlaying){
     lightButton(btn);
-    playTone(btn, clueHoldTime - decreaseTime);
+    //here the decreaseTime (set during variable declariong and increased in guess() function) is used to lower to the amount of time a clue is played (audio and highlight)
+    playTone(btn, clueHoldTime - decreaseTime); 
     setTimeout(clearButton, clueHoldTime - decreaseTime, btn);
   }
 }
+//creates a new sequence pattern with each start of a new game using the randomNumber() method
 function setPattern(){
   for(let j = 0; j<= numberOfRounds+1; j++){
     pattern[j] = randomNumber();
   }
 }
+// Allows for SingleClue() to be played as a sequence 
 function playClueSequence(){
   guessCounter = 0;
   context.resume()
@@ -68,11 +89,12 @@ function playClueSequence(){
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
+   //decreaseTime is incremented with each round in the guess() method. This makes the clue sequence faster each round
     delay += clueHoldTime - decreaseTime;
     delay += cluePauseTime - decreaseTime;
   }
 }
-
+//guess(btn) function from prework instructions
 function guess(btn){
   console.log("user guessed: " + btn);
   
@@ -102,13 +124,15 @@ function guess(btn){
     lostGame();
   }
 }    
-// Sound Synthesis Functions
+
+// Sound Synthesis Functions from prework instructions
+//I altered the original frequencies
 const freqMap = {
   1: 261.6,
   2: 329.6,
   3: 392,
   4: 469.6,
-}
+} 
 function playTone(btn,len){ 
   o.frequency.value = freqMap[btn]
   g.gain.setTargetAtTime(volume,context.currentTime + 0.05,0.025)

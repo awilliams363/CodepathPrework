@@ -1,36 +1,43 @@
+<!--Angel Williams-->
+<!--Codepath SITE Prework: Light and Sound Memory Game (hmtl file)-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!--setting charset and using glitch icon-->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="https://glitch.com/favicon.ico" />
 
-    <title>Hello</title>
+    <title>Angel's Light and Sound Memory Game</title>
 
-    <!-- import the webpage's stylesheet -->
+    <!--webpage's stylesheet-->
     <link rel="stylesheet" href="/style.css" />
 
-    <!-- import the webpage's javascript file -->
+    <!--webpage's javascript file -->
     <script src="/script.js" defer></script>
   </head>
   <body>
+    <!--main header (h1) displays name of game-->
     <h1>
       Angel's Light and Sound Memory Game
     </h1>
-    
+    <!--main paragraph (p) displays description of game-->
     <p>
       I'll play a key. You'll repeat after me. 
       Each round is a little faster.
       How long can you remember? 
     </p>
-    
+    <!--Creates start button that starts game on click-->
     <button id="startBtn" onclick="startGame()">
       Start
     </button>
+    <!--Creates stop button that ends game on click-->
     <button class="hidden" id="stopBtn" onclick="stopGame()">
       Stop
     </button>
+    <!--Creates container for game buttons -->
     <div id="gameButtonArea">
+      <!--4 game buttons that play audio and highlight during a click or a clue-->
       <button id="button1" onclick="guess(1)" onmousedown="startTone(1)" onmouseup="stopTone()"></button>
       <button id="button2" onclick="guess(2)" onmousedown="startTone(2)" onmouseup="stopTone()"></button>
       <button id="button3" onclick="guess(3)" onmousedown="startTone(3)" onmouseup="stopTone()"></button>
